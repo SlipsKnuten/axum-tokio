@@ -5,6 +5,7 @@ use axum::{
 
 use crate::handlers::hello;
 use crate::handlers::api;
+use crate::handlers::db_conn;
 use super::routesconstants::*;
 
 pub fn create_router() -> Router {
