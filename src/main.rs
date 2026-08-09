@@ -1,4 +1,5 @@
 mod routes;
+mod logging;
 mod handlers;
 
 #[tokio::main]
