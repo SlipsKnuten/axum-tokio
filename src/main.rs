@@ -10,8 +10,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     handlers::db_insert::db_insert(&pool, "Gustaf", "gustaf@example.com").await?;
 
-    handlers::get_all_users::get_all_users(&pool).await?;
-    let app = routes::create_router();
+    let app = routes::create_router().with_state(pool);
 
     let listener = tokio::net::TcpListener::bind("0.0.0.0:3000").await?;
 
