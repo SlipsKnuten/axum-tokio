@@ -1,20 +1,20 @@
 use crate::db::db_insert::create_user;
-use crate::db::models::NewUser;
+use crate::db::models::{NewUser, User};
 use axum::{Json, extract::State, http::StatusCode};
 use sqlx::PgPool;
 
 pub async fn create_user_handler(
     State(pool): State<PgPool>,
     Json(new_user): Json<NewUser>,
-) -> Result<Json<Vec<NewUser>>, (StatusCode, String)> {
-    let user = create_user(&pool, &new_user.email, &new_user.name)
+) -> Result<(StatusCode, Json<User>), (StatusCode, String)> {
+    let user = create_user(&pool, &new_user.name, &new_user.email)
         .await
         .map_err(|error| {
-            eprintln!("failed to gets users: {error}");
+            eprintln!("failed to create user: {error}");
             (
                 StatusCode::INTERNAL_SERVER_ERROR,
-                "failed got get users".to_owned(),
+                "failed to create user".to_owned(),
             )
         })?;
-    Ok((StatsCode::CREATED, Json(user)))
+    Ok((StatusCode::CREATED, Json(user)))
 }

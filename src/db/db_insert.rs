@@ -3,7 +3,7 @@ use sqlx::PgPool;
 
 use crate::db::models::User;
 
-pub async fn create_user(pool: &PgPool, name: &str, email: &str) -> Result<Vec<User>, sqlx::Error> {
+pub async fn create_user(pool: &PgPool, name: &str, email: &str) -> Result<User, sqlx::Error> {
     sqlx::query_as::<_, User>(INSERT_USER)
         .bind(name)
         .bind(email)
