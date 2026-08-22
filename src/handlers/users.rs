@@ -4,7 +4,7 @@ use axum::{Json, extract::State, http::StatusCode};
 use sqlx::PgPool;
 
 pub async fn get_all(State(pool): State<PgPool>) -> Result<Json<Vec<User>>, (StatusCode, String)> {
-    let users = users::get_all(&pool).await.map_err(|error| {
+    let users = get_all(&pool).await.map_err(|error| {
         eprintln!("failed to gets users: {error}");
         (
             StatusCode::INTERNAL_SERVER_ERROR,

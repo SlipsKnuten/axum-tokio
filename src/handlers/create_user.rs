@@ -5,8 +5,9 @@ use sqlx::PgPool;
 
 pub async fn create_user_handler(
     State(pool): State<PgPool>,
+    Json(new_user): Json<NewUser>,
 ) -> Result<Json<Vec<NewUser>>, (StatusCode, String)> {
-    let users = create_user::create_user(&pool).await.map_err(|error| {
+    let users = create_user(&pool).await.map_err(|error| {
         eprintln!("failed to gets users: {error}");
         (
             StatusCode::INTERNAL_SERVER_ERROR,

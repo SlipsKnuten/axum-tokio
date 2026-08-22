@@ -9,9 +9,8 @@ pub async fn create_user(
     email: &str,
 ) -> Result<Vec<NewUser>, sqlx::Error> {
     sqlx::query_as::<_, NewUser>(INSERT_USER)
-        .bind(&name)
-        .bind(&email)
-        .execute(pool)
+        .bind(name)
+        .bind(email)
+        .fetch_one(pool)
         .await
-    Ok(())
 }

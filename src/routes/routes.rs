@@ -11,5 +11,9 @@ pub fn create_router() -> Router<PgPool> {
     Router::new()
         .route(ROOT_PATH, get(hello::hello))
         .route(API_CALL, get(api::api))
-        .route(USERS, get(users::get_all), post(db_insert::create_user))
+        .route(
+            USERS,
+            get(users::get_all),
+            post(create_user::create_user_handler),
+        )
 }
