@@ -1,6 +1,5 @@
 mod db;
 mod handlers;
-mod logging;
 mod routes;
 
 #[tokio::main]
@@ -9,6 +8,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     sqlx::migrate!("./migrations").run(&pool).await?;
 
+    db::create::create_users_table(&pool).await?;
     db::insert::db_insert(&pool, "Gustaf", "gustaf@example.com").await?;
 
     let app = routes::create_router().with_state(pool);
