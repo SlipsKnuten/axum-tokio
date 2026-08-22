@@ -1,4 +1,5 @@
-use crate::handlers::{handlerconstants::GET_ALL_USERS_SQL_COMMAND, models::User};
+use crate::db::models::User;
+use crate::handlers::handlerconstants::GET_ALL_USERS_SQL_COMMAND;
 use axum::{Json, extract::State, http::StatusCode};
 use sqlx::PgPool;
 

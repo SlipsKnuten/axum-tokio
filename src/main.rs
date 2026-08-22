@@ -5,7 +5,7 @@ mod routes;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let pool = handlers::db_conn().await?;
+    let pool = db::connection().await?;
 
     sqlx::migrate!("./migrations").run(&pool).await?;
 
