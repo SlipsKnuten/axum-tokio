@@ -7,3 +7,8 @@ pub struct User {
     pub name: String,
     pub email: String,
 }
+
+pub struct NewUser {
+    pub email: String,
+    pub name: String,
+}
