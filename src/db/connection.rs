@@ -1,12 +1,11 @@
 use dotenv::dotenv;
-use sqlx::{postgres::PgPoolOptions, PgPool};
+use sqlx::{PgPool, postgres::PgPoolOptions};
 use std::env;
 
 pub async fn db_conn() -> Result<PgPool, sqlx::Error> {
     dotenv().ok();
 
-    let database_url =
-        env::var("DATABASE_URL").expect("DB URL not set");
+    let database_url = env::var("DATABASE_URL").expect("DB URL not set");
 
     let pool = PgPoolOptions::new()
         .max_connections(100)
