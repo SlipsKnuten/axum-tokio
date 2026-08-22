@@ -13,7 +13,6 @@ pub fn create_router() -> Router<PgPool> {
         .route(API_CALL, get(api::api))
         .route(
             USERS,
-            get(users::get_all),
-            post(create_user::create_user_handler),
+            get(users::get_all).post(create_user::create_user_handler),
         )
 }
